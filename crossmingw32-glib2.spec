@@ -16,7 +16,7 @@ Version:	2.2.2
 Release:	1
 License:	LGPL
 Group:		Libraries
-Source0:	http://www.gimp.org/~tml/gimp/win32/glib-dev-2.2.2.zip
+Source0:	http://www.gimp.org/~tml/gimp/win32/glib-dev-%{version}.zip
 URL:		http://www.gtk.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -105,4 +105,7 @@ cp glib2/* $RPM_BUILD_ROOT%{arch} -rf
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%{arch}
+%{arch}/bin/*
+%{arch}/include/*
+%{arch}/lib/*
+%{arch}/share/*
