@@ -13,7 +13,7 @@ Summary(tr):	Yararlý ufak yordamlar kitaplýðý
 Summary(zh_CN):	ÊµÓÃ¹¤¾ßº¯Êý¿â
 Name:		crossmingw32-%{realname}
 Version:	2.2.2
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 Source0:	http://www.gimp.org/~tml/gimp/win32/glib-dev-%{version}.zip
@@ -105,6 +105,7 @@ cp glib2/* $RPM_BUILD_ROOT%{arch} -rf
 rm -rf $RPM_BUILD_ROOT
 
 %files
+%defattr(644,root,root,755)
 %{arch}/bin/*
 %{arch}/include/*
 %{arch}/lib/*
