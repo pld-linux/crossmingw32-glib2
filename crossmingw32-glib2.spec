@@ -18,6 +18,7 @@ Group:		Libraries
 Source0:	http://www.gimp.org/~tml/gimp/win32/glib-dev-%{version}.zip
 # Source0-md5:	b89988b709cde0435e3db021f32b0e12
 URL:		http://www.gtk.org/
+BuildRequires:	unzip
 Requires:	crossmingw32-binutils
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
