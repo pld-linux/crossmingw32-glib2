@@ -1,4 +1,3 @@
-%define		realname		glib
 Summary:	Useful routines for 'C' programming - Ming32 cross version
 Summary(cs):	©ikovná knihovna s funkcemi pro pomocné programy
 Summary(da):	Nyttige biblioteksfunktioner
@@ -11,17 +10,16 @@ Summary(pl):	Biblioteka zawieraj±ca wiele u¿ytecznych funkcji C - wersja skro¶na
 Summary(pt_BR):	Conjunto de funções gráficas utilitárias
 Summary(tr):	Yararlý ufak yordamlar kitaplýðý
 Summary(zh_CN):	ÊµÓÃ¹¤¾ßº¯Êý¿â
-Name:		crossmingw32-%{realname}
-Version:	2.2.2
-Release:	2
+Name:		crossmingw32-glib2
+Version:	2.4.7
+Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://www.gimp.org/~tml/gimp/win32/glib-dev-%{version}.zip
+# Source0-md5:	b89988b709cde0435e3db021f32b0e12
 URL:		http://www.gtk.org/
-BuildRequires:	autoconf
-BuildRequires:	automake
-BuildRequires:	libtool
-BuildRoot:	%{tmpdir}/%{realname}-%{version}-root-%(id -u -n)
+Requires:	crossmingw32-binutils
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
 
@@ -89,17 +87,15 @@ Yararlý yordamlar kitaplýðý. Geliþtirme kitaplýklarý ve baþlýk
 dosyalarý glib-devel paketinde yer almaktadýr.
 
 %prep
-install -d glib2
-#%setup -q -n %{realname}-%{version}
-cd glib2 && rm * -rf ; unzip %{SOURCE0} && cd ..
-
-%build
+%setup -q -c
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{arch}/share
 
-install -d $RPM_BUILD_ROOT%{arch}
-cp glib2/* $RPM_BUILD_ROOT%{arch} -rf
+# omit man,share/aclocal,share/gtk-doc (they are system-wide)
+cp -rf bin include lib $RPM_BUILD_ROOT%{arch}
+cp -rf share/glib-2.0 $RPM_BUILD_ROOT%{arch}/share
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -107,6 +103,11 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %{arch}/bin/*
-%{arch}/include/*
-%{arch}/lib/*
-%{arch}/share/*
+%{arch}/include/glib-2.0
+%{arch}/lib/*.def
+%{arch}/lib/*.lib
+%{arch}/lib/*.dll.a
+%{arch}/lib/glib-2.0
+%{arch}/lib/pkgconfig/*.pc
+# XXX: missing dir
+%{arch}/share/glib-2.0
