@@ -1,5 +1,5 @@
 %define		realname		glib
-Summary:	Useful routines for 'C' programming
+Summary:	Useful routines for 'C' programming - Ming32 cross version
 Summary(cs):	©ikovná knihovna s funkcemi pro pomocné programy
 Summary(da):	Nyttige biblioteksfunktioner
 Summary(de):	Eine nützliche Library von Dienstprogramm-Funktionen
@@ -7,7 +7,7 @@ Summary(es):	Conjunto de funciones gráficas utilitarias
 Summary(fi):	Kirjasto, jossa on työkalufunktioita
 Summary(fr):	Bibliothèque de fonctions utilitaires
 Summary(ja):	ÊØÍø¤Ê¥æ¡¼¥Æ¥£¥ê¥Æ¥£´Ø¿ô¤Î¥é¥¤¥Ö¥é¥ê
-Summary(pl):	Biblioteka zawieraj±ca wiele u¿ytecznych funkcji C
+Summary(pl):	Biblioteka zawieraj±ca wiele u¿ytecznych funkcji C - wersja skro¶na dla Ming32
 Summary(pt_BR):	Conjunto de funções gráficas utilitárias
 Summary(tr):	Yararlý ufak yordamlar kitaplýðý
 Summary(zh_CN):	ÊµÓÃ¹¤¾ßº¯Êý¿â
@@ -39,6 +39,8 @@ GLib, is a library which includes support routines for C such as
 lists, trees, hashes, memory allocation, and many other things. GLIB
 includes also generally useful data structures used by GIMP and many
 other.
+
+This package contains the cross version for Win32.
 
 %description -l cs
 ©ikovná knihovna s funkcemi pro pomocné programy. Vývojové knihovny a
@@ -75,6 +77,8 @@ Glib jest zestawem bibliotek zawieraj±cych funkcje do obs³ugi list i
 drzew, funkcje mieszaj±ce, funkcje do alokacji pamiêci i du¿o innych
 podstawowych funkcji i ró¿nych struktur danych u¿ywanych przez program
 GIMP i wiele innych.
+
+Ten pakiet zawiera wersjê skro¶n± dla Win32.
 
 %description -l pt_BR
 Conjunto de funções utilitárias. Bibliotecas de desenvolvimento e
