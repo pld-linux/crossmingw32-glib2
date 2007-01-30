@@ -11,12 +11,12 @@ Summary(pt_BR):	Conjunto de funções gráficas utilitárias
 Summary(tr):	Yararlý ufak yordamlar kitaplýðý
 Summary(zh_CN):	ÊµÓÃ¹¤¾ßº¯Êý¿â
 Name:		crossmingw32-glib2
-Version:	2.12.7
+Version:	2.12.9
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://ftp.gtk.org/pub/glib/2.12/win32/glib-dev-%{version}.zip
-# Source0-md5:	844f15b040854fc78bef0b4257742476
+# Source0-md5:	7cf4be4e16727cfa8fbfd84de64f4b9c
 URL:		http://www.gtk.org/
 BuildRequires:	unzip
 Requires:	crossmingw32-binutils
