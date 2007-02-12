@@ -1,15 +1,15 @@
 Summary:	Useful routines for 'C' programming - Ming32 cross version
-Summary(cs):	©ikovná knihovna s funkcemi pro pomocné programy
-Summary(da):	Nyttige biblioteksfunktioner
-Summary(de):	Eine nützliche Library von Dienstprogramm-Funktionen
-Summary(es):	Conjunto de funciones gráficas utilitarias
-Summary(fi):	Kirjasto, jossa on työkalufunktioita
-Summary(fr):	Bibliothèque de fonctions utilitaires
-Summary(ja):	ÊØÍø¤Ê¥æ¡¼¥Æ¥£¥ê¥Æ¥£´Ø¿ô¤Î¥é¥¤¥Ö¥é¥ê
-Summary(pl):	Biblioteka zawieraj±ca wiele u¿ytecznych funkcji C - wersja skro¶na dla Ming32
-Summary(pt_BR):	Conjunto de funções gráficas utilitárias
-Summary(tr):	Yararlı ufak yordamlar kitaplığı
-Summary(zh_CN):	ÊµÓÃ¹¤¾ßº¯Êı¿â
+Summary(cs.UTF-8):   Å ikovnÃ¡ knihovna s funkcemi pro pomocnÃ© programy
+Summary(da.UTF-8):   Nyttige biblioteksfunktioner
+Summary(de.UTF-8):   Eine nÃ¼tzliche Library von Dienstprogramm-Funktionen
+Summary(es.UTF-8):   Conjunto de funciones grÃ¡ficas utilitarias
+Summary(fi.UTF-8):   Kirjasto, jossa on tyÃ¶kalufunktioita
+Summary(fr.UTF-8):   BibliothÃ¨que de fonctions utilitaires
+Summary(ja.UTF-8):   ä¾¿åˆ©ãªãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£é–¢æ•°ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
+Summary(pl.UTF-8):   Biblioteka zawierajÄ…ca wiele uÅ¼ytecznych funkcji C - wersja skroÅ›na dla Ming32
+Summary(pt_BR.UTF-8):   Conjunto de funÃ§Ãµes grÃ¡ficas utilitÃ¡rias
+Summary(tr.UTF-8):   YararlÄ± ufak yordamlar kitaplÄ±ÄŸÄ±
+Summary(zh_CN.UTF-8):   å®ç”¨å·¥å…·å‡½æ•°åº“
 Name:		crossmingw32-glib2
 Version:	2.12.9
 Release:	1
@@ -41,51 +41,51 @@ other.
 
 This package contains the cross version for Win32.
 
-%description -l cs
-©ikovná knihovna s funkcemi pro pomocné programy. Vıvojové knihovny a
-hlavièky jsou v balíèku glib-devel.
+%description -l cs.UTF-8
+Å ikovnÃ¡ knihovna s funkcemi pro pomocnÃ© programy. VÃ½vojovÃ© knihovny a
+hlaviÄky jsou v balÃ­Äku glib-devel.
 
-%description -l da
+%description -l da.UTF-8
 Nyttigt bibliotek med forskellige funktioner. Udviklings- biblioteker
 og headerfiler er i glib-devel pakken.
 
-%description -l de
-Eine nützliche Library von Dienstprogramm-Funktionen.
+%description -l de.UTF-8
+Eine nÃ¼tzliche Library von Dienstprogramm-Funktionen.
 Entwicklungs-Libraries und Header befinden sich in glib-devel.
 
-%description -l es
+%description -l es.UTF-8
 Conjunto de funciones utilitarias. Bibliotecas de desarrollo y
-archivos de inclusión están en glib-devel.
+archivos de inclusiÃ³n estÃ¡n en glib-devel.
 
-%description -l fi
-Kirjasto, jossa on työkalufunktioita. Kehitysversiot ja
+%description -l fi.UTF-8
+Kirjasto, jossa on tyÃ¶kalufunktioita. Kehitysversiot ja
 header-tiedostot ovat glib-devel-paketissa.
 
-%description -l ja
+%description -l ja.UTF-8
 
-GLib¤Ï¥æ¡¼¥Æ¥£¥ê¥Æ¥£´Ø¿ô¤ò½¸¤á¤¿ÊØÍø¤Ê¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£¤³¤Î£Ã¸À¸ìÍÑ¥é¥¤¥Ö¥é¥ê¤Ï¡¢
-¤¤¤¯¤Ä¤«¤ÎÌäÂê¤ò²ò·è¤¹¤ë¤è¤¦Àß·×¤µ¤ì¤Æ¤ª¤ê¡¢Â¿¤¯¤Î¥×¥í¥°¥é¥à¤«¤éÍ×µá¤µ¤ì¤ë»È¤¤¤ä¤¹¤¤
-´Ø¿ô¤òÄó¶¡¤·¤Ş¤¹¡£
+GLibã¯ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£é–¢æ•°ã‚’é›†ã‚ãŸä¾¿åˆ©ãªãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚ã“ã®ï¼£è¨€èªç”¨ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã¯ã€
+ã„ãã¤ã‹ã®å•é¡Œã‚’è§£æ±ºã™ã‚‹ã‚ˆã†è¨­è¨ˆã•ã‚Œã¦ãŠã‚Šã€å¤šãã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‹ã‚‰è¦æ±‚ã•ã‚Œã‚‹ä½¿ã„ã‚„ã™ã„
+é–¢æ•°ã‚’æä¾›ã—ã¾ã™ã€‚
 
-GLib¤ÏGDK,
-GTK+Â¾Â¿¤¯¤Î¥¢¥×¥ê¥±¡¼¥·¥ç¥ó¤ÇÍøÍÑ¤µ¤ì¤ë¡£¤³¤Î¥é¥¤¥Ö¥é¥ê¤Ë°ÍÂ¸¤¹¤ë¥¢¥×¥ê¥±¡¼¥·¥ç¥ó
-Åù¤Î¤¿¤á¤Ë¤³¤Îglib¥Ñ¥Ã¥±¡¼¥¸¤ò¥¤¥ó¥¹¥È¡¼¥ë¤·¤Æ¤¯¤À¤µ¤¤¡£
+GLibã¯GDK,
+GTK+ä»–å¤šãã®ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã§åˆ©ç”¨ã•ã‚Œã‚‹ã€‚ã“ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã«ä¾å­˜ã™ã‚‹ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³
+ç­‰ã®ãŸã‚ã«ã“ã®glibãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¦ãã ã•ã„ã€‚
 
-%description -l pl
-Glib jest zestawem bibliotek zawieraj±cych funkcje do obs³ugi list i
-drzew, funkcje mieszaj±ce, funkcje do alokacji pamiêci i du¿o innych
-podstawowych funkcji i ró¿nych struktur danych u¿ywanych przez program
+%description -l pl.UTF-8
+Glib jest zestawem bibliotek zawierajÄ…cych funkcje do obsÅ‚ugi list i
+drzew, funkcje mieszajÄ…ce, funkcje do alokacji pamiÄ™ci i duÅ¼o innych
+podstawowych funkcji i rÃ³Å¼nych struktur danych uÅ¼ywanych przez program
 GIMP i wiele innych.
 
-Ten pakiet zawiera wersjê skro¶n± dla Win32.
+Ten pakiet zawiera wersjÄ™ skroÅ›nÄ… dla Win32.
 
-%description -l pt_BR
-Conjunto de funções utilitárias. Bibliotecas de desenvolvimento e
-arquivos de inclusão estão em glib-devel.
+%description -l pt_BR.UTF-8
+Conjunto de funÃ§Ãµes utilitÃ¡rias. Bibliotecas de desenvolvimento e
+arquivos de inclusÃ£o estÃ£o em glib-devel.
 
-%description -l tr
-Yararlı yordamlar kitaplığı. Geliştirme kitaplıkları ve başlık
-dosyaları glib-devel paketinde yer almaktadır.
+%description -l tr.UTF-8
+YararlÄ± yordamlar kitaplÄ±ÄŸÄ±. GeliÅŸtirme kitaplÄ±klarÄ± ve baÅŸlÄ±k
+dosyalarÄ± glib-devel paketinde yer almaktadÄ±r.
 
 %prep
 %setup -q -c
