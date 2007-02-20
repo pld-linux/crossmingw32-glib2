@@ -10,13 +10,16 @@ Summary(pl.UTF-8):	Biblioteka zawierająca wiele użytecznych funkcji C - wersja
 Summary(pt_BR.UTF-8):	Conjunto de funções gráficas utilitárias
 Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
-Name:		crossmingw32-glib2
+%define		_realname   glib
+Name:		crossmingw32-%{_realname}2
 Version:	2.12.9
 Release:	1
 License:	LGPL
 Group:		Libraries
-Source0:	ftp://ftp.gtk.org/pub/glib/2.12/win32/glib-dev-%{version}.zip
-# Source0-md5:	7cf4be4e16727cfa8fbfd84de64f4b9c
+#Source0:	ftp://ftp.gtk.org/pub/glib/2.12/win32/glib-dev-%{version}.zip
+Source0:	ftp://ftp.gtk.org/pub/glib/2.12/%{_realname}-%{version}.tar.bz2
+# Source0-md5:	b3f6a2a318610af6398b3445f1a2d6c6
+Patch0:		%{name}-stacktest.patch
 URL:		http://www.gtk.org/
 BuildRequires:	unzip
 Requires:	crossmingw32-binutils
@@ -30,6 +33,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		gccarch			%{_prefix}/lib/gcc-lib/%{target}
 %define		gcclib			%{_prefix}/lib/gcc-lib/%{target}/%{version}
 
+%define		_sysprefix		/usr
+%define		_prefix			%{_sysprefix}/%{target}
+%define		_pkgconfigdir		%{_prefix}/lib/pkgconfig
 %define		__cc			%{target}-gcc
 %define		__cxx			%{target}-g++
 
@@ -88,27 +94,44 @@ Yararlı yordamlar kitaplığı. Geliştirme kitaplıkları ve başlık
 dosyaları glib-devel paketinde yer almaktadır.
 
 %prep
-%setup -q -c
+%setup -q -n %{_realname}-%{version}
+%patch0 -p1
+
+%build
+export PKG_CONFIG_PATH=%{_prefix}/lib/pkgconfig
+export RANLIB=%{target}-ranlib
+%{__libtoolize}
+%{__aclocal}
+%{__automake}
+%{__autoconf}
+%configure \
+	--host=%{target}
+
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{arch}/share
+#install -d $RPM_BUILD_ROOT%{arch}/share
+#
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
-# omit man,share/aclocal,share/gtk-doc (they are system-wide)
-cp -rf bin include lib $RPM_BUILD_ROOT%{arch}
-cp -rf share/glib-2.0 $RPM_BUILD_ROOT%{arch}/share
+%find_lang glib20 --with-gnome
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f glib20.lang
 %defattr(644,root,root,755)
-%{arch}/bin/*
-%{arch}/include/glib-2.0
-%{arch}/lib/*.def
-%{arch}/lib/*.lib
-%{arch}/lib/*.dll.a
-%{arch}/lib/glib-2.0
-%{arch}/lib/pkgconfig/*.pc
-# XXX: missing dir
-%{arch}/share/glib-2.0
+%dir %{_includedir}/glib-2.0
+%{_includedir}/glib-2.0
+%{_libdir}/*.la
+%{_libdir}/*.a
+%dir %{_libdir}/glib-2.0/include
+%{_libdir}/glib-2.0/include/glibconfig.h
+%{_pkgconfigdir}/*.pc
+%{_datadir}/aclocal/glib*
+%dir %{_datadir}/glib-2.0/gettext
+%attr(755,root,root) %{_datadir}/glib-2.0/gettext/mkinstalldirs
+%dir %{_datadir}/glib-2.0/gettext/po
+%{_datadir}/glib-2.0/gettext/po/*
