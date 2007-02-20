@@ -99,12 +99,13 @@ dosyaları glib-devel paketinde yer almaktadır.
 
 %build
 export PKG_CONFIG_PATH=%{_prefix}/lib/pkgconfig
-export RANLIB=%{target}-ranlib
 %{__libtoolize}
 %{__aclocal}
 %{__automake}
 %{__autoconf}
 %configure \
+	AR="%{target}-ar" \
+	RANLIB="%{target}-ranlib" \
 	--host=%{target}
 
 %{__make}
