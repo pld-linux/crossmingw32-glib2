@@ -21,6 +21,8 @@ Source0:	ftp://ftp.gtk.org/pub/glib/2.12/%{_realname}-%{version}.tar.bz2
 # Source0-md5:	b3f6a2a318610af6398b3445f1a2d6c6
 Patch0:		%{name}-stacktest.patch
 URL:		http://www.gtk.org/
+BuildRequires:	crossmingw32-libiconv
+BuildRequires:	crossmingw32-gettext
 BuildRequires:	unzip
 Requires:	crossmingw32-binutils
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -28,7 +30,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		no_install_post_strip	1
 
 %define		target			i386-mingw32
-%define		target_platform 	i386-pc-mingw32
+%define		host			%{target}
+%define		target_platform 	%{target}
 %define		arch			%{_prefix}/%{target}
 %define		gccarch			%{_prefix}/lib/gcc-lib/%{target}
 %define		gcclib			%{_prefix}/lib/gcc-lib/%{target}/%{version}
@@ -104,9 +107,10 @@ export PKG_CONFIG_PATH=%{_prefix}/lib/pkgconfig
 %{__automake}
 %{__autoconf}
 %configure \
-	AR="%{target}-ar" \
-	RANLIB="%{target}-ranlib" \
-	--host=%{target}
+	--target=%{target} \
+	--host=%{target} \
+	--disable-gtk-doc \
+	--enable-shared
 
 %{__make}
 
@@ -128,6 +132,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/glib-2.0
 %{_libdir}/*.la
 %{_libdir}/*.a
+%{_bindir}/*.dll
 %dir %{_libdir}/glib-2.0/include
 %{_libdir}/glib-2.0/include/glibconfig.h
 %{_pkgconfigdir}/*.pc
