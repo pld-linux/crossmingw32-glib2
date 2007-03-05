@@ -72,7 +72,6 @@ Kirjasto, jossa on työkalufunktioita. Kehitysversiot ja
 header-tiedostot ovat glib-devel-paketissa.
 
 %description -l ja.UTF-8
-
 GLibはユーティリティ関数を集めた便利なライブラリです。このＣ言語用ライブラリは、
 いくつかの問題を解決するよう設計されており、多くのプログラムから要求される使いやすい
 関数を提供します。
@@ -121,6 +120,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+# use system glib2-devel instead
+rm -f $RPM_BUILD_ROOT%{_datadir}/aclocal/*.m4
+
 %find_lang glib20 --with-gnome
 
 %clean
@@ -136,7 +138,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/glib-2.0/include
 %{_libdir}/glib-2.0/include/glibconfig.h
 %{_pkgconfigdir}/*.pc
-%{_datadir}/aclocal/glib*
 %dir %{_datadir}/glib-2.0/gettext
 %attr(755,root,root) %{_datadir}/glib-2.0/gettext/mkinstalldirs
 %dir %{_datadir}/glib-2.0/gettext/po
