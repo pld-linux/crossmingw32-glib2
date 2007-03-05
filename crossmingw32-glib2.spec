@@ -21,8 +21,9 @@ Source0:	ftp://ftp.gtk.org/pub/glib/2.12/%{_realname}-%{version}.tar.bz2
 # Source0-md5:	b3f6a2a318610af6398b3445f1a2d6c6
 Patch0:		%{name}-stacktest.patch
 URL:		http://www.gtk.org/
-BuildRequires:	crossmingw32-libiconv
+BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-gettext
+BuildRequires:	crossmingw32-libiconv
 BuildRequires:	unzip
 Requires:	crossmingw32-binutils
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -116,8 +117,7 @@ export PKG_CONFIG_PATH=%{_prefix}/lib/pkgconfig
 
 %install
 rm -rf $RPM_BUILD_ROOT
-#install -d $RPM_BUILD_ROOT%{arch}/share
-#
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
