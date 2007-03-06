@@ -15,17 +15,18 @@ Name:		crossmingw32-%{_realname}2
 Version:	2.12.9
 Release:	1
 License:	LGPL
-Group:		Libraries
-#Source0:	ftp://ftp.gtk.org/pub/glib/2.12/win32/glib-dev-%{version}.zip
+Group:		Development/Libraries
 Source0:	ftp://ftp.gtk.org/pub/glib/2.12/%{_realname}-%{version}.tar.bz2
 # Source0-md5:	b3f6a2a318610af6398b3445f1a2d6c6
 Patch0:		%{name}-stacktest.patch
 URL:		http://www.gtk.org/
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-gettext
 BuildRequires:	crossmingw32-libiconv
-BuildRequires:	unzip
-Requires:	crossmingw32-binutils
+BuildRequires:	libtool
+Requires:	crossmingw32-gettext
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
@@ -40,6 +41,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_sysprefix		/usr
 %define		_prefix			%{_sysprefix}/%{target}
 %define		_pkgconfigdir		%{_prefix}/lib/pkgconfig
+%define		_dlldir			/usr/share/wine/windows/system
 %define		__cc			%{target}-gcc
 %define		__cxx			%{target}-g++
 
@@ -96,6 +98,19 @@ arquivos de inclusão estão em glib-devel.
 Yararlı yordamlar kitaplığı. Geliştirme kitaplıkları ve başlık
 dosyaları glib-devel paketinde yer almaktadır.
 
+%package dll
+Summary:	DLL glib2 libraries for Windows
+Summary(pl.UTF-8):	Biblioteki DLL glib2 dla Windows
+Group:		Applications/Emulators
+Requires:	crossmingw32-gettext-dll
+Requires:	wine
+
+%description dll
+DLL glib2 libraries for Windows.
+
+%description dll -l pl.UTF-8
+Biblioteki DLL glib2 dla Windows.
+
 %prep
 %setup -q -n %{_realname}-%{version}
 %patch0 -p1
@@ -120,25 +135,41 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-# use system glib2-devel instead
-rm -f $RPM_BUILD_ROOT%{_datadir}/aclocal/*.m4
+install -d $RPM_BUILD_ROOT%{_dlldir}
+mv -f $RPM_BUILD_ROOT%{_prefix}/bin/*.dll $RPM_BUILD_ROOT%{_dlldir}
 
-%find_lang glib20 --with-gnome
+rm -f $RPM_BUILD_ROOT%{_libdir}/charset.alias
+# use system glib2-devel instead
+rm -rf $RPM_BUILD_ROOT%{_datadir}/{aclocal,glib-2.0,gtk-doc,man}
+# runtime
+rm -rf $RPM_BUILD_ROOT%{_datadir}/locale
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -f glib20.lang
+%files
 %defattr(644,root,root,755)
-%dir %{_includedir}/glib-2.0
+%{_libdir}/libglib-2.0.dll.a
+%{_libdir}/libgmodule-2.0.dll.a
+%{_libdir}/libgobject-2.0.dll.a
+%{_libdir}/libgthread-2.0.dll.a
+%{_libdir}/libglib-2.0.la
+%{_libdir}/libgmodule-2.0.la
+%{_libdir}/libgobject-2.0.la
+%{_libdir}/libgthread-2.0.la
+%{_libdir}/glib-2.0.def
+%{_libdir}/gmodule-2.0.def
+%{_libdir}/gobject-2.0.def
+%{_libdir}/gthread-2.0.def
 %{_includedir}/glib-2.0
-%{_libdir}/*.la
-%{_libdir}/*.a
-%{_bindir}/*.dll
+%dir %{_libdir}/glib-2.0
 %dir %{_libdir}/glib-2.0/include
 %{_libdir}/glib-2.0/include/glibconfig.h
 %{_pkgconfigdir}/*.pc
-%dir %{_datadir}/glib-2.0/gettext
-%attr(755,root,root) %{_datadir}/glib-2.0/gettext/mkinstalldirs
-%dir %{_datadir}/glib-2.0/gettext/po
-%{_datadir}/glib-2.0/gettext/po/*
+
+%files dll
+%defattr(644,root,root,755)
+%{_dlldir}/libglib-2.0-*.dll
+%{_dlldir}/libgmodule-2.0-*.dll
+%{_dlldir}/libgobject-2.0-*.dll
+%{_dlldir}/libgthread-2.0-*.dll
