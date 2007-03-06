@@ -20,7 +20,7 @@ Source0:	ftp://ftp.gtk.org/pub/glib/2.12/%{_realname}-%{version}.tar.bz2
 # Source0-md5:	b3f6a2a318610af6398b3445f1a2d6c6
 Patch0:		%{name}-stacktest.patch
 URL:		http://www.gtk.org/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-gettext
