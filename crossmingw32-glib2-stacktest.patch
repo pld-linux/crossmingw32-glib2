@@ -1,0 +1,13 @@
+--- glib-2.12.9/configure.in.orig	2007-01-17 00:24:39.000000000 +0100
++++ glib-2.12.9/configure.in	2007-03-06 11:44:09.683703523 +0100
+@@ -629,7 +629,9 @@
+ 	glib_cv_stack_grows=no
+         ,
+ 	glib_cv_stack_grows=yes
+-        ,)
++        ,[
++	glib_cv_stack_grows=no
++	AC_MSG_WARN([cross-compiling, assuming no growing stack])])
+ ])
+ 
+ dnl AC_C_INLINE is useless to us since it bails out too early, we need to
