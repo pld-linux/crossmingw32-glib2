@@ -136,6 +136,11 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_dlldir}
 mv -f $RPM_BUILD_ROOT%{_prefix}/bin/*.dll $RPM_BUILD_ROOT%{_dlldir}
 
+%if 0%{!?debug:1}
+%{target}-strip --strip-unneeded -R.comment -R.note $RPM_BUILD_ROOT%{_dlldir}/*.dll
+%{target}-strip -g -R.comment -R.note $RPM_BUILD_ROOT%{_libdir}/*.a
+%endif
+
 rm -f $RPM_BUILD_ROOT%{_libdir}/charset.alias
 # use system glib2-devel instead
 rm -rf $RPM_BUILD_ROOT%{_datadir}/{aclocal,glib-2.0,gtk-doc,man}
