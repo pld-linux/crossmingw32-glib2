@@ -10,15 +10,16 @@ Summary(pl.UTF-8):	Biblioteka zawierająca wiele użytecznych funkcji C - wersja
 Summary(pt_BR.UTF-8):	Conjunto de funções gráficas utilitárias
 Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
-%define		_realname   glib
-Name:		crossmingw32-%{_realname}2
-Version:	2.12.13
+%define		realname   glib
+Name:		crossmingw32-%{realname}2
+Version:	2.14.0
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
-Source0:	ftp://ftp.gtk.org/pub/glib/2.12/%{_realname}-%{version}.tar.bz2
+Source0:	ftp://ftp.gtk.org/pub/glib/2.14/%{realname}-%{version}.tar.bz2
 # Source0-md5:	d76124236e4e216e8c0861341e967a76
 Patch0:		%{name}-stacktest.patch
+Patch1:		glib2-symbols.patch
 URL:		http://www.gtk.org/
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
@@ -34,7 +35,6 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		target			i386-mingw32
 %define		host			%{target}
 %define		target_platform 	%{target}
-%define		arch			%{_prefix}/%{target}
 
 %define		_sysprefix		/usr
 %define		_prefix			%{_sysprefix}/%{target}
@@ -110,8 +110,9 @@ DLL glib2 libraries for Windows.
 Biblioteki DLL glib2 dla Windows.
 
 %prep
-%setup -q -n %{_realname}-%{version}
+%setup -q -n %{realname}-%{version}
 %patch0 -p1
+%patch1 -p1
 
 %build
 export PKG_CONFIG_PATH=%{_prefix}/lib/pkgconfig
