@@ -17,7 +17,7 @@ Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	ftp://ftp.gtk.org/pub/glib/2.14/%{realname}-%{version}.tar.bz2
-# Source0-md5:	d76124236e4e216e8c0861341e967a76
+# Source0-md5:	6fabf21f68631043bc6924e01398e3af
 Patch0:		%{name}-stacktest.patch
 Patch1:		glib2-symbols.patch
 URL:		http://www.gtk.org/
