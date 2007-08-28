@@ -115,7 +115,7 @@ Biblioteki DLL glib2 dla Windows.
 %patch1 -p1
 
 %build
-export PKG_CONFIG_PATH=%{_prefix}/lib/pkgconfig
+export PKG_CONFIG_LIBDIR=%{_prefix}/lib/pkgconfig
 %{__libtoolize}
 %{__aclocal}
 %{__automake}
