@@ -12,22 +12,24 @@ Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-%{realname}2
-Version:	2.14.0
+Version:	2.14.1
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	ftp://ftp.gtk.org/pub/glib/2.14/%{realname}-%{version}.tar.bz2
-# Source0-md5:	6fabf21f68631043bc6924e01398e3af
+# Source0-md5:	196d7944a8ddc1f7c3d1e9c7146dd560
 Patch0:		%{name}-stacktest.patch
-Patch1:		glib2-symbols.patch
 URL:		http://www.gtk.org/
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-gettext
 BuildRequires:	crossmingw32-libiconv
+BuildRequires:	crossmingw32-pcre >= 7.2
 BuildRequires:	libtool
+BuildRequires:	pkgconfig
 Requires:	crossmingw32-gettext
+Requires:	crossmingw32-pcre >= 7.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
@@ -101,6 +103,7 @@ Summary:	DLL glib2 libraries for Windows
 Summary(pl.UTF-8):	Biblioteki DLL glib2 dla Windows
 Group:		Applications/Emulators
 Requires:	crossmingw32-gettext-dll
+Requires:	crossmingw32-pcre-dll
 Requires:	wine
 
 %description dll
@@ -112,7 +115,6 @@ Biblioteki DLL glib2 dla Windows.
 %prep
 %setup -q -n %{realname}-%{version}
 %patch0 -p1
-%patch1 -p1
 
 %build
 export PKG_CONFIG_LIBDIR=%{_prefix}/lib/pkgconfig
@@ -124,7 +126,8 @@ export PKG_CONFIG_LIBDIR=%{_prefix}/lib/pkgconfig
 	--target=%{target} \
 	--host=%{target} \
 	--disable-gtk-doc \
-	--enable-shared
+	--enable-shared \
+	--with-pcre=system
 
 %{__make}
 
