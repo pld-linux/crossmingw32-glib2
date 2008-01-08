@@ -12,12 +12,12 @@ Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-%{realname}2
-Version:	2.14.4
+Version:	2.14.5
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	ftp://ftp.gtk.org/pub/glib/2.14/%{realname}-%{version}.tar.bz2
-# Source0-md5:	7ee7874108cbe9ea7fff1f4ab3389ce8
+# Source0-md5:	c7eedaacd39d3606c307da5ea7fc7018
 Patch0:		%{name}-stacktest.patch
 URL:		http://www.gtk.org/
 BuildRequires:	autoconf >= 2.54
@@ -40,6 +40,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysprefix		/usr
 %define		_prefix			%{_sysprefix}/%{target}
+%define		_libdir			%{_prefix}/lib
 %define		_pkgconfigdir		%{_prefix}/lib/pkgconfig
 %define		_dlldir			/usr/share/wine/windows/system
 %define		__cc			%{target}-gcc
@@ -172,7 +173,12 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/glib-2.0
 %dir %{_libdir}/glib-2.0/include
 %{_libdir}/glib-2.0/include/glibconfig.h
-%{_pkgconfigdir}/*.pc
+%{_pkgconfigdir}/glib-2.0.pc
+%{_pkgconfigdir}/gmodule-2.0.pc
+%{_pkgconfigdir}/gmodule-export-2.0.pc
+%{_pkgconfigdir}/gmodule-no-export-2.0.pc
+%{_pkgconfigdir}/gobject-2.0.pc
+%{_pkgconfigdir}/gthread-2.0.pc
 
 %files dll
 %defattr(644,root,root,755)
