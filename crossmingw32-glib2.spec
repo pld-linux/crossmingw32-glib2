@@ -12,12 +12,12 @@ Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-%{realname}2
-Version:	2.14.5
+Version:	2.14.6
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
-Source0:	ftp://ftp.gtk.org/pub/glib/2.14/%{realname}-%{version}.tar.bz2
-# Source0-md5:	c7eedaacd39d3606c307da5ea7fc7018
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.14/glib-%{version}.tar.bz2
+# Source0-md5:	3b340946d6916ee9cbf2c348e7c099f1
 Patch0:		%{name}-stacktest.patch
 URL:		http://www.gtk.org/
 BuildRequires:	autoconf >= 2.54
@@ -25,11 +25,11 @@ BuildRequires:	automake
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-gettext
 BuildRequires:	crossmingw32-libiconv
-BuildRequires:	crossmingw32-pcre >= 7.2
+BuildRequires:	crossmingw32-pcre >= 7.6
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 Requires:	crossmingw32-gettext
-Requires:	crossmingw32-pcre >= 7.2
+Requires:	crossmingw32-pcre >= 7.6
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
@@ -104,7 +104,7 @@ Summary:	DLL glib2 libraries for Windows
 Summary(pl.UTF-8):	Biblioteki DLL glib2 dla Windows
 Group:		Applications/Emulators
 Requires:	crossmingw32-gettext-dll
-Requires:	crossmingw32-pcre-dll
+Requires:	crossmingw32-pcre-dll >= 7.6
 Requires:	wine
 
 %description dll
