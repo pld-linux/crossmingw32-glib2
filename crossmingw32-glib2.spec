@@ -12,22 +12,23 @@ Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-%{realname}2
-Version:	2.14.6
+Version:	2.16.1
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.14/glib-%{version}.tar.bz2
-# Source0-md5:	3b340946d6916ee9cbf2c348e7c099f1
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/glib-%{version}.tar.bz2
+# Source0-md5:	9852daf0605f827bfd7199ffe4f5b22d
 Patch0:		%{name}-stacktest.patch
+Patch1:		%{realname}2-lt.patch
 URL:		http://www.gtk.org/
 BuildRequires:	autoconf >= 2.54
-BuildRequires:	automake
+BuildRequires:	automake >= 1:1.7
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-gettext
 BuildRequires:	crossmingw32-libiconv
 BuildRequires:	crossmingw32-pcre >= 7.6
 BuildRequires:	libtool
-BuildRequires:	pkgconfig
+BuildRequires:	pkgconfig >= 1:0.16.0
 Requires:	crossmingw32-gettext
 Requires:	crossmingw32-pcre >= 7.6
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -116,6 +117,7 @@ Biblioteki DLL glib2 dla Windows.
 %prep
 %setup -q -n %{realname}-%{version}
 %patch0 -p1
+%patch1 -p1
 
 %build
 export PKG_CONFIG_LIBDIR=%{_prefix}/lib/pkgconfig
@@ -157,10 +159,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%{_libdir}/libgio-2.0.dll.a
 %{_libdir}/libglib-2.0.dll.a
 %{_libdir}/libgmodule-2.0.dll.a
 %{_libdir}/libgobject-2.0.dll.a
 %{_libdir}/libgthread-2.0.dll.a
+%{_libdir}/libgio-2.0.la
 %{_libdir}/libglib-2.0.la
 %{_libdir}/libgmodule-2.0.la
 %{_libdir}/libgobject-2.0.la
@@ -173,6 +177,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/glib-2.0
 %dir %{_libdir}/glib-2.0/include
 %{_libdir}/glib-2.0/include/glibconfig.h
+%{_pkgconfigdir}/gio-2.0.pc
 %{_pkgconfigdir}/glib-2.0.pc
 %{_pkgconfigdir}/gmodule-2.0.pc
 %{_pkgconfigdir}/gmodule-export-2.0.pc
@@ -182,6 +187,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files dll
 %defattr(644,root,root,755)
+%{_dlldir}/libgio-2.0-*.dll
 %{_dlldir}/libglib-2.0-*.dll
 %{_dlldir}/libgmodule-2.0-*.dll
 %{_dlldir}/libgobject-2.0-*.dll
