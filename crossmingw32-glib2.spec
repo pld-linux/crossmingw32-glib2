@@ -12,12 +12,12 @@ Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-%{realname}2
-Version:	2.16.5
+Version:	2.18.0
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/glib-%{version}.tar.bz2
-# Source0-md5:	039f02d47d4071322a3f00abf031e5d9
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.18/glib-%{version}.tar.bz2
+# Source0-md5:	06e5afe4ce055085dc5fd9fdab527bf7
 Patch0:		%{name}-stacktest.patch
 Patch1:		%{realname}2-lt.patch
 URL:		http://www.gtk.org/
@@ -26,11 +26,11 @@ BuildRequires:	automake >= 1:1.7
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-gettext
 BuildRequires:	crossmingw32-libiconv
-BuildRequires:	crossmingw32-pcre >= 7.6
+BuildRequires:	crossmingw32-pcre >= 7.8
 BuildRequires:	libtool
 BuildRequires:	pkgconfig >= 1:0.16.0
 Requires:	crossmingw32-gettext
-Requires:	crossmingw32-pcre >= 7.6
+Requires:	crossmingw32-pcre >= 7.8
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
@@ -46,6 +46,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_dlldir			/usr/share/wine/windows/system
 %define		__cc			%{target}-gcc
 %define		__cxx			%{target}-g++
+
+%ifnarch %{ix86}
+# arch-specific flags (like alpha's -mieee) are not valid for i386 gcc
+%define		optflags	-O2
+%endif
+# -z options are invalid for mingw linker
+%define		filterout_ld	-Wl,-z,.*
 
 %description
 GLib, is a library which includes support routines for C such as
@@ -105,7 +112,7 @@ Summary:	DLL glib2 libraries for Windows
 Summary(pl.UTF-8):	Biblioteki DLL glib2 dla Windows
 Group:		Applications/Emulators
 Requires:	crossmingw32-gettext-dll
-Requires:	crossmingw32-pcre-dll >= 7.6
+Requires:	crossmingw32-pcre-dll >= 7.8
 Requires:	wine
 
 %description dll
