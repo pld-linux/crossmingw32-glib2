@@ -12,12 +12,12 @@ Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-%{realname}2
-Version:	2.18.1
+Version:	2.18.2
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.18/glib-%{version}.tar.bz2
-# Source0-md5:	51a9a33f49a4896d4d95d8e980666b9e
+# Source0-md5:	d11a5cc5e08cff53349a3481816fdaff
 Patch0:		%{name}-stacktest.patch
 Patch1:		%{realname}2-lt.patch
 URL:		http://www.gtk.org/
