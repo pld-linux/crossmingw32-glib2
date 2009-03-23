@@ -16,7 +16,7 @@ Version:	2.20.0
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.18/glib-%{version}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.20/glib-%{version}.tar.bz2
 # Source0-md5:	05188e560dbd8bddd568e24ce10dd003
 Patch0:		%{name}-stacktest.patch
 URL:		http://www.gtk.org/
