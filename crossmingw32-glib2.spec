@@ -12,12 +12,12 @@ Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-%{realname}2
-Version:	2.18.4
+Version:	2.20.0
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.18/glib-%{version}.tar.bz2
-# Source0-md5:	ec25ed261534d870141000ab73f1a2bf
+# Source0-md5:	05188e560dbd8bddd568e24ce10dd003
 Patch0:		%{name}-stacktest.patch
 URL:		http://www.gtk.org/
 BuildRequires:	autoconf >= 2.54
@@ -55,7 +55,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 GLib, is a library which includes support routines for C such as
-lists, trees, hashes, memory allocation, and many other things. GLIB
+lists, trees, hashes, memory allocation, and many other things. GLib
 includes also generally useful data structures used by GIMP and many
 other.
 
@@ -91,7 +91,7 @@ GTK+他多くのアプリケーションで利用される。このライブラ�
 等のためにこのglibパッケージをインストールしてください。
 
 %description -l pl.UTF-8
-Glib jest zestawem bibliotek zawierających funkcje do obsługi list i
+GLib jest zestawem bibliotek zawierających funkcje do obsługi list i
 drzew, funkcje mieszające, funkcje do alokacji pamięci i dużo innych
 podstawowych funkcji i różnych struktur danych używanych przez program
 GIMP i wiele innych.
