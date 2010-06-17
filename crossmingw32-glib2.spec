@@ -1,4 +1,4 @@
-Summary:	Useful routines for 'C' programming - Ming32 cross version
+Summary:	Useful routines for 'C' programming - MinGW32 cross version
 Summary(cs.UTF-8):	Šikovná knihovna s funkcemi pro pomocné programy
 Summary(da.UTF-8):	Nyttige biblioteksfunktioner
 Summary(de.UTF-8):	Eine nützliche Library von Dienstprogramm-Funktionen
@@ -6,7 +6,7 @@ Summary(es.UTF-8):	Conjunto de funciones gráficas utilitarias
 Summary(fi.UTF-8):	Kirjasto, jossa on työkalufunktioita
 Summary(fr.UTF-8):	Bibliothèque de fonctions utilitaires
 Summary(ja.UTF-8):	便利なユーティリティ関数のライブラリ
-Summary(pl.UTF-8):	Biblioteka zawierająca wiele użytecznych funkcji C - wersja skrośna dla Ming32
+Summary(pl.UTF-8):	Biblioteka zawierająca wiele użytecznych funkcji C - wersja skrośna dla MinGW32
 Summary(pt_BR.UTF-8):	Conjunto de funções gráficas utilitárias
 Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
