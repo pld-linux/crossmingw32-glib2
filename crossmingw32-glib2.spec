@@ -12,21 +12,23 @@ Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-%{realname}2
-Version:	2.24.2
+Version:	2.26.0
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.24/glib-%{version}.tar.bz2
-# Source0-md5:	8a6e45d7840460ed84288ebfd75782d4
+# Source0-md5:	9b7dc61f5e389e1cff277a6350c37397
 Patch0:		%{name}-stacktest.patch
 URL:		http://www.gtk.org/
-BuildRequires:	autoconf >= 2.54
-BuildRequires:	automake >= 1:1.7
+BuildRequires:	autoconf >= 2.62
+BuildRequires:	automake >= 1:1.10
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-gettext
 BuildRequires:	crossmingw32-libiconv
 BuildRequires:	crossmingw32-pcre >= 7.8
-BuildRequires:	libtool
+# host glib-genmarshall and glib-compile-schemas are needed for cross-compiling
+BuildRequires:	glib2 >= 1:2.26.0
+BuildRequires:	libtool >= 2:2.2
 BuildRequires:	pkgconfig >= 1:0.16.0
 Requires:	crossmingw32-gettext
 Requires:	crossmingw32-pcre >= 7.8
@@ -155,11 +157,12 @@ mv -f $RPM_BUILD_ROOT%{_prefix}/bin/*.dll $RPM_BUILD_ROOT%{_dlldir}
 %{target}-strip -g -R.comment -R.note $RPM_BUILD_ROOT%{_libdir}/*.a
 %endif
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/charset.alias
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/charset.alias
 # use system glib2-devel instead
-rm -rf $RPM_BUILD_ROOT%{_datadir}/{aclocal,glib-2.0,gtk-doc,man}
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/{aclocal,glib-2.0,gtk-doc,man} \
+	$RPM_BUILD_ROOT/etc/bash_completion.d
 # runtime
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -181,11 +184,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/gmodule-2.0.def
 %{_libdir}/gobject-2.0.def
 %{_libdir}/gthread-2.0.def
+%{_includedir}/gio-win32-2.0
 %{_includedir}/glib-2.0
 %dir %{_libdir}/glib-2.0
 %dir %{_libdir}/glib-2.0/include
 %{_libdir}/glib-2.0/include/glibconfig.h
 %{_pkgconfigdir}/gio-2.0.pc
+%{_pkgconfigdir}/gio-windows-2.0.pc
 %{_pkgconfigdir}/glib-2.0.pc
 %{_pkgconfigdir}/gmodule-2.0.pc
 %{_pkgconfigdir}/gmodule-export-2.0.pc
