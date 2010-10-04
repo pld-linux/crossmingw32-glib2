@@ -16,7 +16,7 @@ Version:	2.26.0
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.24/glib-%{version}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.26/glib-%{version}.tar.bz2
 # Source0-md5:	9b7dc61f5e389e1cff277a6350c37397
 Patch0:		%{name}-stacktest.patch
 URL:		http://www.gtk.org/
