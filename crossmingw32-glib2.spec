@@ -13,7 +13,7 @@ Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-glib2
 Version:	2.28.6
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.28/glib-%{version}.tar.bz2
@@ -34,6 +34,7 @@ BuildRequires:	libtool >= 2:2.2
 BuildRequires:	pkgconfig >= 1:0.16
 Requires:	crossmingw32-gettext
 Requires:	crossmingw32-pcre >= 8.11
+ExcludeArch:	i386
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
@@ -51,8 +52,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		__cxx			%{target}-g++
 
 %ifnarch %{ix86}
-# arch-specific flags (like alpha's -mieee) are not valid for i386 gcc
-%define		optflags	-O2
+# arch-specific flags (like alpha's -mieee) are not valid for i386 gcc.
+# now at least i486 is required for atomic operations
+%define		optflags	-O2 -march=i486
 %endif
 # -z options are invalid for mingw linker
 %define		filterout_ld	-Wl,-z,.*
