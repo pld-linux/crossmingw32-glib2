@@ -12,12 +12,12 @@ Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-glib2
-Version:	2.30.3
+Version:	2.32.0
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.30/glib-%{version}.tar.xz
-# Source0-md5:	0f9fa329c6c1012d0fd861ad3d8a4520
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.32/glib-%{version}.tar.xz
+# Source0-md5:	c5fa76fbf9184d20dfb04af66b598190
 Patch0:		%{name}-stacktest.patch
 URL:		http://www.gtk.org/
 BuildRequires:	autoconf >= 2.62
@@ -29,7 +29,7 @@ BuildRequires:	crossmingw32-libiconv
 BuildRequires:	crossmingw32-pcre >= 8.11
 BuildRequires:	crossmingw32-zlib
 # host glib-genmarshall and glib-compile-schemas are needed for cross-compiling
-BuildRequires:	glib2 >= 1:2.28.0
+BuildRequires:	glib2 >= 1:2.32.0
 BuildRequires:	gtk-doc >= 1.15
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	pkgconfig >= 1:0.16
