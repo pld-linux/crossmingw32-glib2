@@ -1,0 +1,18 @@
+--- glib-2.32.2/configure.ac.orig	2012-05-07 18:14:09.061606437 +0200
++++ glib-2.32.2/configure.ac	2012-05-07 18:56:32.524886758 +0200
+@@ -452,6 +452,7 @@
+ 
+ AC_MSG_RESULT($enable_iconv_cache)
+ 
++AC_CHECK_HEADERS([stddef.h stdlib.h string.h])
+ 
+ dnl
+ dnl zlib support
+@@ -921,7 +922,6 @@
+ 
+ # Checks for libcharset
+ AM_LANGINFO_CODESET
+-AC_CHECK_HEADERS([stddef.h stdlib.h string.h])
+ AC_CHECK_FUNCS(setlocale)
+ 
+ # check additional type sizes

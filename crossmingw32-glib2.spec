@@ -12,15 +12,14 @@ Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-glib2
-Version:	2.32.1
+Version:	2.32.2
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.32/glib-%{version}.tar.xz
-# Source0-md5:	032c7cf9868c9aa186b490b155a41144
+# Source0-md5:	5bfdb6197afb90e4dbc7b1bb98f0eae0
 Patch0:		%{name}-stacktest.patch
-Patch1:		%{name}-errno.patch
-Patch2:		%{name}-nonunix.patch
+Patch1:		glib2-cross.patch
 URL:		http://www.gtk.org/
 BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake >= 1:1.11
@@ -137,7 +136,6 @@ Biblioteki DLL glib2 dla Windows.
 %setup -q -n %{realname}-%{version}
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 export PKG_CONFIG_LIBDIR=%{_prefix}/lib/pkgconfig
