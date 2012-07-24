@@ -12,14 +12,15 @@ Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-glib2
-Version:	2.32.3
+Version:	2.32.4
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.32/glib-%{version}.tar.xz
-# Source0-md5:	9bd3ac535c24b6c162be13b2c43c5adc
+# Source0-md5:	bf84fefd9c1a5b5a7a38736f4ddd674a
 Patch0:		%{name}-stacktest.patch
 Patch1:		glib2-cross.patch
+Patch2:		glib2-win32.patch
 URL:		http://www.gtk.org/
 BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake >= 1:1.11
@@ -136,6 +137,7 @@ Biblioteki DLL glib2 dla Windows.
 %setup -q -n %{realname}-%{version}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 export PKG_CONFIG_LIBDIR=%{_prefix}/lib/pkgconfig
@@ -171,9 +173,8 @@ mv -f $RPM_BUILD_ROOT%{_prefix}/bin/*.dll $RPM_BUILD_ROOT%{_dlldir}
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/charset.alias
 # use system glib2-devel instead
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/{aclocal,gdb,glib-2.0,gtk-doc,man} \
-	$RPM_BUILD_ROOT%{_libdir}/gdbus-2.0/codegen \
-	$RPM_BUILD_ROOT/etc/bash_completion.d
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/{aclocal,bash-completion,gdb,glib-2.0,gtk-doc,man} \
+	$RPM_BUILD_ROOT%{_libdir}/gdbus-2.0/codegen
 # runtime
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale
 
