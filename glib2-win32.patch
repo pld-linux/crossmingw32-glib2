@@ -9,3 +9,14 @@
  
    if (filename)
      {
+--- glib-2.34.0/gio/gregistrysettingsbackend.c.orig	2012-08-19 16:39:53.000000000 +0200
++++ glib-2.34.0/gio/gregistrysettingsbackend.c	2012-09-26 17:54:44.204962755 +0200
+@@ -233,7 +233,7 @@
+   if (result_code == ERROR_KEY_DELETED)
+     trace ("(%s)", win32_message);
+   else
+-    g_message (win32_message);
++    g_message ("%s", win32_message);
+ };
+ 
+ 
