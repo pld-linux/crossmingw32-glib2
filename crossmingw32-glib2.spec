@@ -12,12 +12,12 @@ Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-glib2
-Version:	2.34.3
+Version:	2.36.0
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.34/glib-%{version}.tar.xz
-# Source0-md5:	a4ca31e258273c3761e3de2edd607661
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.36/glib-%{version}.tar.xz
+# Source0-md5:	2047dff287473450593edecb18f79c17
 Patch0:		%{name}-stacktest.patch
 Patch1:		glib2-cross.patch
 Patch2:		glib2-win32.patch
@@ -175,8 +175,7 @@ mv -f $RPM_BUILD_ROOT%{_prefix}/bin/*.dll $RPM_BUILD_ROOT%{_dlldir}
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/charset.alias
 # use system glib2-devel instead
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/{aclocal,bash-completion,gdb,glib-2.0,gtk-doc,man} \
-	$RPM_BUILD_ROOT%{_libdir}/gdbus-2.0/codegen
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/{aclocal,bash-completion,gdb,glib-2.0,gtk-doc,man}
 # runtime
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale
 
@@ -195,10 +194,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libgmodule-2.0.la
 %{_libdir}/libgobject-2.0.la
 %{_libdir}/libgthread-2.0.la
-%{_libdir}/gio-2.0.def
-%{_libdir}/glib-2.0.def
-%{_libdir}/gmodule-2.0.def
-%{_libdir}/gobject-2.0.def
 %{_libdir}/gthread-2.0.def
 %{_includedir}/gio-win32-2.0
 %{_includedir}/glib-2.0
