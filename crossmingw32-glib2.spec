@@ -12,12 +12,12 @@ Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-glib2
-Version:	2.36.3
-Release:	2
+Version:	2.36.4
+Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.36/glib-%{version}.tar.xz
-# Source0-md5:	89180c7354b0acd3efb0a36ac05ca39c
+# Source0-md5:	2f4b15f7ef43d8702d067ab987bf7aba
 Patch0:		%{name}-stacktest.patch
 Patch1:		glib2-cross.patch
 Patch2:		glib2-win32.patch
@@ -154,6 +154,7 @@ export PKG_CONFIG_LIBDIR=%{_prefix}/lib/pkgconfig
 	DBUS_DAEMON=no \
 	--target=%{target} \
 	--host=%{target} \
+	--disable-dtrace \
 	--disable-gtk-doc \
 	--disable-silent-rules \
 	--enable-shared \
