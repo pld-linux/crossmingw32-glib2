@@ -12,12 +12,12 @@ Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-glib2
-Version:	2.36.4
+Version:	2.38.0
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.36/glib-%{version}.tar.xz
-# Source0-md5:	2f4b15f7ef43d8702d067ab987bf7aba
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.38/glib-%{version}.tar.xz
+# Source0-md5:	c50d2805a76763e9b4cc4385d4ea215d
 Patch0:		%{name}-stacktest.patch
 Patch1:		glib2-cross.patch
 Patch2:		glib2-win32.patch
@@ -176,7 +176,6 @@ mv -f $RPM_BUILD_ROOT%{_prefix}/bin/*.dll $RPM_BUILD_ROOT%{_dlldir}
 %{target}-strip -g -R.comment -R.note $RPM_BUILD_ROOT%{_libdir}/*.a
 %endif
 
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/charset.alias
 # use system glib2-devel instead
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/{aclocal,bash-completion,gdb,glib-2.0,gtk-doc,man}
 # runtime
