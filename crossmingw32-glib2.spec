@@ -12,15 +12,13 @@ Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-glib2
-Version:	2.38.2
+Version:	2.40.0
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.38/glib-%{version}.tar.xz
-# Source0-md5:	26d1d08e478fc48c181ca8be44f5b69f
-Patch0:		%{name}-stacktest.patch
-Patch1:		glib2-cross.patch
-Patch2:		glib2-win32.patch
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.40/glib-%{version}.tar.xz
+# Source0-md5:	05fb7cb17eacbc718e90366a1eae60d9
+Patch0:		glib2-win32.patch
 URL:		http://www.gtk.org/
 BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake >= 1:1.11
@@ -29,10 +27,12 @@ BuildRequires:	crossmingw32-gettext
 BuildRequires:	crossmingw32-libffi >= 3.0.0
 BuildRequires:	crossmingw32-libiconv
 BuildRequires:	crossmingw32-pcre >= 8.13
+# rand_s()
+BuildRequires:	crossmingw32-runtime >= 1:4.0.3-2
 BuildRequires:	crossmingw32-zlib
 # host glib-genmarshall and glib-compile-schemas are needed for cross-compiling
 BuildRequires:	glib2 >= 1:2.32.0
-BuildRequires:	gtk-doc >= 1.15
+BuildRequires:	gtk-doc >= 1.20
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	pkgconfig >= 1:0.16
 BuildRequires:	python >= 1:2.5
@@ -139,8 +139,6 @@ Biblioteki DLL glib2 dla Windows.
 %prep
 %setup -q -n %{realname}-%{version}
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
 
 %build
 export PKG_CONFIG_LIBDIR=%{_prefix}/lib/pkgconfig
