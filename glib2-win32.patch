@@ -19,3 +19,17 @@
  #include <stdlib.h>
  #endif
  
+--- glib-2.44.0/gio/gwin32networking.h.orig	2015-03-20 18:33:38.000000000 +0100
++++ glib-2.44.0/gio/gwin32networking.h	2015-03-23 21:03:15.924279829 +0100
+@@ -24,8 +24,9 @@
+ /* Check if more ANSI-compliant Winsock2 functions are provided */
+ /* For run-time compatibility with Windows XP, remove when XP support dropped */
+ 
+-typedef INT (WSAAPI *PFN_InetPton) (INT, PCTSTR, PVOID);
+-typedef PCTSTR (WSAAPI *PFN_InetNtop) (INT, PVOID, PTSTR, size_t);
++typedef ULONG NET_IFINDEX;
++typedef INT (WSAAPI *PFN_InetPton) (INT, LPCTSTR, PVOID);
++typedef LPCTSTR (WSAAPI *PFN_InetNtop) (INT, PVOID, PTSTR, size_t);
+ typedef NET_IFINDEX (WINAPI *PFN_IfNameToIndex) (PCSTR);
+ 
+ typedef struct _GWin32WinsockFuncs
