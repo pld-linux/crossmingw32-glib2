@@ -1,14 +1,3 @@
---- glib-2.34.0/gio/gregistrysettingsbackend.c.orig	2012-08-19 16:39:53.000000000 +0200
-+++ glib-2.34.0/gio/gregistrysettingsbackend.c	2012-09-26 17:54:44.204962755 +0200
-@@ -233,7 +233,7 @@
-   if (result_code == ERROR_KEY_DELETED)
-     trace ("(%s)", win32_message);
-   else
--    g_message (win32_message);
-+    g_message ("%s", win32_message);
- };
- 
- 
 --- glib-2.40.0/glib/grand.c.orig	2014-02-22 16:29:07.000000000 +0100
 +++ glib-2.40.0/glib/grand.c	2014-03-25 18:45:39.693348981 +0100
 @@ -55,6 +55,7 @@
@@ -33,3 +22,53 @@
  typedef NET_IFINDEX (WINAPI *PFN_IfNameToIndex) (PCSTR);
  
  typedef struct _GWin32WinsockFuncs
+--- glib-2.46.0/glib/gstrfuncs.c.orig	2015-09-12 18:05:31.000000000 +0200
++++ glib-2.46.0/glib/gstrfuncs.c	2015-09-22 17:09:13.736714571 +0200
+@@ -1272,7 +1272,7 @@
+       gchar buf[1024];
+       GError *error = NULL;
+ 
+-#if defined(G_OS_WIN32)
++#if defined(G_OS_WIN32) && !defined(__MINGW32__)
+       strerror_s (buf, sizeof (buf), errnum);
+       msg = buf;
+ #elif defined(HAVE_STRERROR_R)
+--- glib-2.46.0/gio/gwin32appinfo.c.orig	2015-09-21 14:37:29.000000000 +0200
++++ glib-2.46.0/gio/gwin32appinfo.c	2015-09-22 17:34:28.039984356 +0200
+@@ -34,6 +34,11 @@
+ #include <gio/gwin32registrykey.h>
+ 
+ #include <windows.h>
++#include <wchar.h>
++
++#ifndef LOAD_LIBRARY_AS_IMAGE_RESOURCE
++#define LOAD_LIBRARY_AS_IMAGE_RESOURCE 0x20
++#endif
+ 
+ /* We need to watch 8 places:
+  * 0) HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\Shell\\Associations\\UrlAssociations
+--- glib-2.46.0/gio/gwin32registrykey.c.orig	2015-09-21 12:44:58.000000000 +0200
++++ glib-2.46.0/gio/gwin32registrykey.c	2015-09-22 18:50:25.926459740 +0200
+@@ -25,10 +25,21 @@
+ #pragma warning ( disable:4005 )
+ #endif
+ #include <windows.h>
++#ifdef __MINGW32__
++#include <ddk/ntstatus.h>
++#include <ddk/ntddk.h>
++#if !defined HKEY_PERFORMANCE_NLSTEXT
++#define HKEY_PERFORMANCE_NLSTEXT (( HKEY ) (ULONG_PTR)((LONG)0x80000060) )
++#endif
++#if ! defined HKEY_PERFORMANCE_TEXT
++#define HKEY_PERFORMANCE_TEXT (( HKEY ) (ULONG_PTR)((LONG)0x80000050) )
++#endif
++#else
+ #include <ntstatus.h>
+ #include <winternl.h>
++#endif
+ 
+-#ifndef _WDMDDK_
++#if !defined(_WDMDDK_) && !defined(__WINDDK_H)
+ typedef enum _KEY_INFORMATION_CLASS {
+   KeyBasicInformation,
+   KeyNodeInformation,
