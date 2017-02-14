@@ -12,12 +12,12 @@ Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-glib2
-Version:	2.50.0
+Version:	2.50.3
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.50/glib-%{version}.tar.xz
-# Source0-md5:	0fd6d3339cd7e4714eb643c6fa4b6499
+# Source0-md5:	381ab22934f296750d036aa55a397ded
 Patch0:		glib2-win32.patch
 URL:		http://www.gtk.org/
 BuildRequires:	autoconf >= 2.62
@@ -175,8 +175,10 @@ mv -f $RPM_BUILD_ROOT%{_prefix}/bin/*.dll $RPM_BUILD_ROOT%{_dlldir}
 %endif
 
 # use system glib2-devel instead
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/{aclocal,bash-completion,gdb,glib-2.0,gtk-doc,man}
+%{__rm} $RPM_BUILD_ROOT%{_bindir}/{gdbus-codegen,glib-gettextize,glib-mkenums,*.exe}
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/{aclocal,bash-completion,gdb,gettext,glib-2.0,gtk-doc,man}
 # runtime
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/charset.alias
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale
 
 %clean
@@ -211,8 +213,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files dll
 %defattr(644,root,root,755)
-%{_dlldir}/libgio-2.0-*.dll
-%{_dlldir}/libglib-2.0-*.dll
-%{_dlldir}/libgmodule-2.0-*.dll
-%{_dlldir}/libgobject-2.0-*.dll
-%{_dlldir}/libgthread-2.0-*.dll
+%{_dlldir}/libgio-2.0-0.dll
+%{_dlldir}/libglib-2.0-0.dll
+%{_dlldir}/libgmodule-2.0-0.dll
+%{_dlldir}/libgobject-2.0-0.dll
+%{_dlldir}/libgthread-2.0-0.dll
