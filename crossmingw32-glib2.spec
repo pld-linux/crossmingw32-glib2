@@ -12,12 +12,12 @@ Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-glib2
-Version:	2.52.3
+Version:	2.54.2
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.52/glib-%{version}.tar.xz
-# Source0-md5:	89265d0289a436e99cad54491eb21ef4
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.54/glib-%{version}.tar.xz
+# Source0-md5:	50f83e08f080f99b1e2f0ad2b760fb81
 Patch0:		glib2-win32.patch
 URL:		http://www.gtk.org/
 BuildRequires:	autoconf >= 2.62
@@ -175,7 +175,7 @@ mv -f $RPM_BUILD_ROOT%{_prefix}/bin/*.dll $RPM_BUILD_ROOT%{_dlldir}
 %endif
 
 # use system glib2-devel instead
-%{__rm} $RPM_BUILD_ROOT%{_bindir}/{gdbus-codegen,glib-gettextize,glib-mkenums,*.exe}
+%{__rm} $RPM_BUILD_ROOT%{_bindir}/{gdbus-codegen,glib-genmarshal,glib-gettextize,glib-mkenums,*.exe}
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/{aclocal,bash-completion,gdb,gettext,glib-2.0,gtk-doc,man}
 # runtime
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/charset.alias
