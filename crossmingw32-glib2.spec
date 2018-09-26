@@ -12,12 +12,12 @@ Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-glib2
-Version:	2.54.2
+Version:	2.58.1
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.54/glib-%{version}.tar.xz
-# Source0-md5:	50f83e08f080f99b1e2f0ad2b760fb81
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.58/glib-%{version}.tar.xz
+# Source0-md5:	4fd2ead128a408c89b9153dfdb99f9a5
 Patch0:		glib2-win32.patch
 URL:		http://www.gtk.org/
 BuildRequires:	autoconf >= 2.62
@@ -29,6 +29,8 @@ BuildRequires:	crossmingw32-libiconv
 BuildRequires:	crossmingw32-pcre >= 8.13
 # rand_s()
 BuildRequires:	crossmingw32-runtime >= 1:4.0.3-2
+# SetThreadErrorMode and more
+BuildRequires:	crossmingw32-w32api >= 1:5.0.2-2
 BuildRequires:	crossmingw32-zlib
 # host glib-genmarshall and glib-compile-schemas are needed for cross-compiling
 BuildRequires:	glib2 >= 1:2.32.0
@@ -176,7 +178,7 @@ mv -f $RPM_BUILD_ROOT%{_prefix}/bin/*.dll $RPM_BUILD_ROOT%{_dlldir}
 
 # use system glib2-devel instead
 %{__rm} $RPM_BUILD_ROOT%{_bindir}/{gdbus-codegen,glib-genmarshal,glib-gettextize,glib-mkenums,*.exe}
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/{aclocal,bash-completion,gdb,gettext,glib-2.0,gtk-doc,man}
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/{aclocal,bash-completion,gdb,gettext,glib-2.0,man}
 # runtime
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/charset.alias
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale
