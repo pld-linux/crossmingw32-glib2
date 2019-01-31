@@ -109,3 +109,14 @@
  #include <iphlpapi.h>
  #include <stdio.h>
  
+--- glib-2.58.3/glib/gutils.h.orig	2019-01-21 14:38:50.000000000 +0100
++++ glib-2.58.3/glib/gutils.h	2019-01-31 18:01:41.630885345 +0100
+@@ -214,7 +214,7 @@
+  * wants the function to be called when it *itself* exits (or is
+  * detached, in case the caller, too, is a DLL).
+  */
+-#if (defined(__MINGW_H) && !defined(_STDLIB_H_)) || (defined(_MSC_VER) && !defined(_INC_STDLIB))
++#if (defined(__MINGW_H) && !defined(_STDLIB_H_) && !defined(_STDLIB_H)) || (defined(_MSC_VER) && !defined(_INC_STDLIB))
+ int atexit (void (*)(void));
+ #endif
+ #define g_atexit(func) atexit(func)
