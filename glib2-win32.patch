@@ -41,19 +41,21 @@
  typedef enum _KEY_INFORMATION_CLASS {
    KeyBasicInformation,
    KeyNodeInformation,
---- glib-2.58.0/glib/gstdio.c.orig	2018-08-30 19:12:08.000000000 +0200
-+++ glib-2.58.0/glib/gstdio.c	2018-09-14 18:41:52.350477519 +0200
-@@ -36,6 +36,9 @@
- #include <direct.h>
+--- glib-2.60.0/glib/gstdio.c.orig	2019-03-04 21:06:14.000000000 +0100
++++ glib-2.60.0/glib/gstdio.c	2019-03-17 08:35:17.205976417 +0100
+@@ -37,6 +37,11 @@
  #include <io.h>
  #include <sys/utime.h>
+ #include <stdlib.h> /* for MB_CUR_MAX */
++#include <ctype.h>
++#include <malloc.h>
 +#ifdef __MINGW32__
 +#include <winioctl.h>
 +#endif
  #else
  #include <utime.h>
  #include <errno.h>
-@@ -54,6 +57,7 @@
+@@ -55,6 +60,7 @@
  #endif
  
  #if defined (G_OS_WIN32)
@@ -61,7 +63,7 @@
  
  /* We can't include Windows DDK and Windows SDK simultaneously,
   * so let's copy this here from MinGW-w64 DDK.
-@@ -90,6 +94,7 @@
+@@ -91,6 +97,7 @@
      } GenericReparseBuffer;
    };
  } REPARSE_DATA_BUFFER, *PREPARSE_DATA_BUFFER;
@@ -69,6 +71,29 @@
  
  static int
  w32_error_to_errno (DWORD error_code)
+@@ -145,7 +152,7 @@
+   return (result - filetime_unix_epoch_offset) / hundreds_of_usec_per_sec;
+ }
+ 
+-#  ifdef _MSC_VER
++#  if defined(_MSC_VER) || defined(__MINGW32__)
+ #    ifndef S_IXUSR
+ #      define _S_IRUSR _S_IREAD
+ #      define _S_IWUSR _S_IWRITE
+@@ -153,9 +160,13 @@
+ #      define S_IRUSR _S_IRUSR
+ #      define S_IWUSR _S_IWUSR
+ #      define S_IXUSR _S_IXUSR
++#    endif
++#    ifndef S_IXGRP
+ #      define S_IRGRP (S_IRUSR >> 3)
+ #      define S_IWGRP (S_IWUSR >> 3)
+ #      define S_IXGRP (S_IXUSR >> 3)
++#    endif
++#    ifndef S_IXOTH
+ #      define S_IROTH (S_IRGRP >> 3)
+ #      define S_IWOTH (S_IWGRP >> 3)
+ #      define S_IXOTH (S_IXGRP >> 3)
 --- glib-2.58.0/glib/giowin32.c.orig	2018-08-30 19:12:08.000000000 +0200
 +++ glib-2.58.0/glib/giowin32.c	2018-09-15 10:12:54.423173008 +0200
 @@ -70,6 +70,7 @@
@@ -89,16 +114,20 @@
  #include <winsock2.h>
  #endif
  
---- glib-2.58.0/gio/gnetworking.h.in.orig	2018-08-30 19:12:08.000000000 +0200
-+++ glib-2.58.0/gio/gnetworking.h.in	2018-09-18 19:33:44.179829189 +0200
-@@ -29,6 +29,7 @@
+--- glib-2.60.0/gio/gnetworking.h.in.orig	2018-08-30 19:12:08.000000000 +0200
++++ glib-2.60.0/gio/gnetworking.h.in	2018-09-18 19:33:44.179829189 +0200
+@@ -29,8 +29,11 @@
  #include <winsock2.h>
  #include <ws2tcpip.h>
  #include <windns.h>
 +#include <winerror.h>
  #include <mswsock.h>
++#ifndef __MINGW32__
  @WSPIAPI_INCLUDE@
++#endif
  #include <iphlpapi.h>
+ #undef interface
+ 
 --- glib-2.58.0/gio/gwin32networkmonitor.c.orig	2018-08-30 19:12:08.000000000 +0200
 +++ glib-2.58.0/gio/gwin32networkmonitor.c	2018-09-26 17:22:59.000209749 +0200
 @@ -28,6 +28,7 @@
@@ -120,3 +149,38 @@
  int atexit (void (*)(void));
  #endif
  #define g_atexit(func) atexit(func)
+--- glib-2.60.0/glib/gstdio-private.c.orig	2019-03-04 21:06:14.000000000 +0100
++++ glib-2.60.0/glib/gstdio-private.c	2019-03-17 08:40:17.301017330 +0100
+@@ -17,6 +17,8 @@
+  * along with this library; if not, see <http://www.gnu.org/licenses/>.
+  */
+ 
++#include <wctype.h>
++
+ /* Strips "\\\\?\\" extended prefix or
+  * "\\??\\" NT Object Manager prefix from
+  * @str in-place, using memmove.
+--- glib-2.60.0/gio/tests/g-file-info.c.orig	2019-03-04 21:06:14.000000000 +0100
++++ glib-2.60.0/gio/tests/g-file-info.c	2019-03-17 20:58:44.544317727 +0100
+@@ -30,6 +30,9 @@
+ #include <stdio.h>
+ #include <glib/gstdio.h>
+ #include <windows.h>
++#ifdef __MINGW32__
++#include <winioctl.h>
++#endif
+ #include <shlobj.h>
+ #include <io.h> /* for _get_osfhandle */
+ #endif
+--- glib-2.60.0/gio/tests/network-address.c.orig	2019-03-04 21:06:14.000000000 +0100
++++ glib-2.60.0/gio/tests/network-address.c	2019-03-17 21:18:09.974670716 +0100
+@@ -3,6 +3,9 @@
+ 
+ #include <gio/gio.h>
+ #include <gio/gnetworking.h>
++#ifdef __MINGW32__
++#include <ntddndis.h>
++#endif
+ 
+ static void
+ test_basic (void)
