@@ -12,12 +12,12 @@ Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-glib2
-Version:	2.60.7
+Version:	2.62.0
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.60/glib-%{version}.tar.xz
-# Source0-md5:	f036f78a7fca330d9f7d939fcf794bde
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.62/glib-%{version}.tar.xz
+# Source0-md5:	a5d34752dd3a6c8d929ade7debc4db03
 Patch0:		glib2-win32.patch
 URL:		http://www.gtk.org/
 BuildRequires:	crossmingw32-gcc
@@ -28,13 +28,13 @@ BuildRequires:	crossmingw32-pcre >= 8.31
 # rand_s()
 BuildRequires:	crossmingw32-runtime >= 1:4.0.3-2
 # SetThreadErrorMode and more
-BuildRequires:	crossmingw32-w32api >= 1:5.0.2-4
+BuildRequires:	crossmingw32-w32api >= 1:5.0.2-7
 BuildRequires:	crossmingw32-zlib
 # host glib-genmarshall and glib-compile-schemas are needed for cross-compiling
-BuildRequires:	glib2 >= 1:2.32.0
+BuildRequires:	glib2 >= 1:2.62.0
 BuildRequires:	gtk-doc >= 1.20
 BuildRequires:	meson >= 0.50.0-2
-BuildRequires:	ninja
+BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig >= 1:0.16
 BuildRequires:	python3 >= 1:3.4
 BuildRequires:	rpmbuild(macros) >= 1.736
