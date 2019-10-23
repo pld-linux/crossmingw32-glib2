@@ -13,14 +13,14 @@ Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-glib2
 Version:	2.62.2
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.62/glib-%{version}.tar.xz
 # Source0-md5:	bed3a70397a019965efac0c49f9c8164
 Patch0:		glib2-win32.patch
 URL:		http://www.gtk.org/
-BuildRequires:	crossmingw32-gcc
+BuildRequires:	crossmingw32-gcc-c++
 BuildRequires:	crossmingw32-gettext
 BuildRequires:	crossmingw32-libffi >= 3.0.0
 BuildRequires:	crossmingw32-libiconv
@@ -58,13 +58,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_dlldir			/usr/share/wine/windows/system
 %define		__pkgconfig_provides	%{nil}
 %define		__pkgconfig_requires	%{nil}
+
 # for meson 0.50+, keep __cc/__cxx as host compiler and pass %{target}-* in meson-cross.txt
 
-%ifnarch %{ix86}
-# arch-specific flags (like alpha's -mieee) are not valid for i386 gcc.
-# now at least i486 is required for atomic operations
-%define		optflags	-O2 -march=i486
-%endif
 # -z options are invalid for mingw linker, most of -f options are Linux-specific
 %define		filterout_ld	-Wl,-z,.*
 %define		filterout_c	-f[-a-z0-9=]*
@@ -166,7 +162,13 @@ ar = '%{target}-ar'
 windres = '%{target}-windres'
 pkgconfig = 'pkg-config'
 [properties]
+%ifarch %{ix86}
 c_args = ['%(echo %{rpmcflags} | sed -e "s/ \+/ /g;s/ /', '/g")']
+%else
+# arch-specific flags (like alpha's -mieee) are not valid for i386 gcc.
+# now at least i486 is required for atomic operations
+c_args = ['-O2', '-march=i486']
+%endif
 EOF
 
 %build
