@@ -12,14 +12,14 @@ Summary(tr.UTF-8):	Yararlı ufak yordamlar kitaplığı
 Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-glib2
-Version:	2.64.1
+Version:	2.64.2
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/glib/2.64/glib-%{version}.tar.xz
-# Source0-md5:	8dec46be3e4fa349b733ef6d4fbeaa3e
+# Source0-md5:	78b6bda8664763a09bd12d864c0ba46c
 Patch0:		glib2-win32.patch
-URL:		http://www.gtk.org/
+URL:		https://www.gtk.org/
 BuildRequires:	crossmingw32-gcc-c++
 BuildRequires:	crossmingw32-gettext
 BuildRequires:	crossmingw32-libffi >= 3.0.0
