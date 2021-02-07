@@ -8,9 +8,9 @@
  #include <string.h>
  
  #include "gcontenttype.h"
---- glib-2.46.0/gio/gwin32registrykey.c.orig	2015-09-21 12:44:58.000000000 +0200
-+++ glib-2.46.0/gio/gwin32registrykey.c	2015-09-22 18:50:25.926459740 +0200
-@@ -25,10 +25,15 @@
+--- glib-2.66.6/gio/gwin32registrykey.c.orig	2021-02-07 19:11:29.468421063 +0100
++++ glib-2.66.6/gio/gwin32registrykey.c	2021-02-07 19:51:00.202244362 +0100
+@@ -25,12 +25,17 @@
  #pragma warning ( disable:4005 )
  #endif
  #include <windows.h>
@@ -21,6 +21,8 @@
  #include <ntstatus.h>
  #include <winternl.h>
 +#endif
+ 
+ #include "gstrfuncsprivate.h"
  
 -#ifndef _WDMDDK_
 +#if !defined(_WDMDDK_) && !defined(_DDK_WINDDK_H)
