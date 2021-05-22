@@ -29,9 +29,9 @@
  typedef enum _KEY_INFORMATION_CLASS {
    KeyBasicInformation,
    KeyNodeInformation,
---- glib-2.60.0/glib/gstdio.c.orig	2019-03-04 21:06:14.000000000 +0100
-+++ glib-2.60.0/glib/gstdio.c	2019-03-17 08:35:17.205976417 +0100
-@@ -37,6 +37,11 @@
+--- glib-2.66.8/glib/gstdio.c.orig	2021-03-18 14:47:48.333693500 +0100
++++ glib-2.66.8/glib/gstdio.c	2021-05-22 12:33:01.585554332 +0200
+@@ -39,6 +39,11 @@
  #include <io.h>
  #include <sys/utime.h>
  #include <stdlib.h> /* for MB_CUR_MAX */
@@ -43,7 +43,7 @@
  #else
  #include <utime.h>
  #include <errno.h>
-@@ -55,6 +60,7 @@
+@@ -57,6 +62,7 @@
  #endif
  
  #if defined (G_OS_WIN32)
@@ -51,7 +51,7 @@
  
  /* We can't include Windows DDK and Windows SDK simultaneously,
   * so let's copy this here from MinGW-w64 DDK.
-@@ -91,6 +97,7 @@
+@@ -93,6 +99,7 @@ typedef struct _REPARSE_DATA_BUFFER
      } GenericReparseBuffer;
    };
  } REPARSE_DATA_BUFFER, *PREPARSE_DATA_BUFFER;
@@ -59,8 +59,8 @@
  
  static int
  w32_error_to_errno (DWORD error_code)
-@@ -145,7 +152,7 @@
-   return (result - filetime_unix_epoch_offset) / hundreds_of_usec_per_sec;
+@@ -191,7 +198,7 @@ _g_win32_filetime_to_unix_time (const FI
+   return result / hundreds_of_usec_per_sec;
  }
  
 -#  ifdef _MSC_VER
@@ -68,7 +68,7 @@
  #    ifndef S_IXUSR
  #      define _S_IRUSR _S_IREAD
  #      define _S_IWUSR _S_IWRITE
-@@ -153,9 +160,13 @@
+@@ -199,9 +206,13 @@ _g_win32_filetime_to_unix_time (const FI
  #      define S_IRUSR _S_IRUSR
  #      define S_IWUSR _S_IWUSR
  #      define S_IXUSR _S_IXUSR
@@ -126,9 +126,9 @@
  #include <iphlpapi.h>
  #include <stdio.h>
  
---- glib-2.58.3/glib/gutils.h.orig	2019-01-21 14:38:50.000000000 +0100
-+++ glib-2.58.3/glib/gutils.h	2019-01-31 18:01:41.630885345 +0100
-@@ -214,7 +214,7 @@
+--- glib-2.66.8/glib/gutils.h.orig	2021-05-22 12:33:27.583570901 +0200
++++ glib-2.66.8/glib/gutils.h	2021-05-22 12:34:08.529030255 +0200
+@@ -343,7 +343,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   * wants the function to be called when it *itself* exits (or is
   * detached, in case the caller, too, is a DLL).
   */
@@ -136,7 +136,7 @@
 +#if (defined(__MINGW_H) && !defined(_STDLIB_H_) && !defined(_STDLIB_H)) || (defined(_MSC_VER) && !defined(_INC_STDLIB))
  int atexit (void (*)(void));
  #endif
- #define g_atexit(func) atexit(func)
+ #define g_atexit(func) atexit(func) GLIB_DEPRECATED_MACRO_IN_2_32
 --- glib-2.60.0/glib/gstdio-private.c.orig	2019-03-04 21:06:14.000000000 +0100
 +++ glib-2.60.0/glib/gstdio-private.c	2019-03-17 08:40:17.301017330 +0100
 @@ -17,6 +17,8 @@
@@ -183,10 +183,10 @@
  
            if (!failed)
              {
---- glib-2.62.0/glib/gwin32.c.orig	2019-09-05 18:56:49.000000000 +0200
-+++ glib-2.62.0/glib/gwin32.c	2019-09-10 19:40:22.822348452 +0200
-@@ -1120,7 +1120,7 @@
-       return EXCEPTION_CONTINUE_EXECUTION;
+--- glib-2.66.8/glib/gwin32.c.orig	2021-03-18 14:47:48.347693400 +0100
++++ glib-2.66.8/glib/gwin32.c	2021-05-22 12:35:00.835079487 +0200
+@@ -1109,7 +1109,7 @@ g_win32_veh_handler (PEXCEPTION_POINTERS
+       return EXCEPTION_CONTINUE_SEARCH;
      }
  
 -  fprintf_s (stderr,
@@ -194,7 +194,7 @@
               "Exception code=0x%lx flags=0x%lx at 0x%p",
               er->ExceptionCode,
               er->ExceptionFlags,
-@@ -1129,7 +1129,7 @@
+@@ -1118,7 +1118,7 @@ g_win32_veh_handler (PEXCEPTION_POINTERS
    switch (er->ExceptionCode)
      {
      case EXCEPTION_ACCESS_VIOLATION:
@@ -203,7 +203,7 @@
                   ". Access violation - attempting to %s at address 0x%p\n",
                   er->ExceptionInformation[0] == 0 ? "read data" :
                   er->ExceptionInformation[0] == 1 ? "write data" :
-@@ -1138,7 +1138,7 @@
+@@ -1127,7 +1127,7 @@ g_win32_veh_handler (PEXCEPTION_POINTERS
                   (void *) er->ExceptionInformation[1]);
        break;
      case EXCEPTION_IN_PAGE_ERROR:
@@ -212,7 +212,7 @@
                   ". Page access violation - attempting to %s at address 0x%p with status %Ix\n",
                   er->ExceptionInformation[0] == 0 ? "read from an inaccessible page" :
                   er->ExceptionInformation[0] == 1 ? "write to an inaccessible page" :
-@@ -1148,7 +1148,7 @@
+@@ -1137,7 +1137,7 @@ g_win32_veh_handler (PEXCEPTION_POINTERS
                   er->ExceptionInformation[2]);
        break;
      default:
