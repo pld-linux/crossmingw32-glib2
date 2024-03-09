@@ -13,7 +13,7 @@ Summary(zh_CN.UTF-8):	实用工具函数库
 %define		realname   glib
 Name:		crossmingw32-glib2
 Version:	2.66.8
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	https://download.gnome.org/sources/glib/2.66/glib-%{version}.tar.xz
@@ -194,6 +194,9 @@ install -d $RPM_BUILD_ROOT%{_dlldir}
 %{target}-strip --strip-unneeded -R.comment -R.note $RPM_BUILD_ROOT%{_dlldir}/*.dll
 %{target}-strip -g -R.comment -R.note $RPM_BUILD_ROOT%{_libdir}/*.a
 %endif
+
+# adjust for system tools
+%{__sed} -i -e '/^\(gio\|gio_querymodules\|glib_compile_schemas\|glib_compile_resources\|gdbus\|gdbus_codegen\|gresource\|gsettings\|glib_genmarshal\|gobject_query\|glib_mkenums\)=/ s,\${bindir},/usr/bin,' $RPM_BUILD_ROOT%{_pkgconfigdir}/{gio,glib}-2.0.pc
 
 # use system glib2-devel instead
 %{__rm} $RPM_BUILD_ROOT%{_bindir}/{gdbus-codegen,glib-genmarshal,glib-gettextize,glib-mkenums,gtester-report,*.exe}

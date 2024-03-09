@@ -185,6 +185,15 @@
              {
 --- glib-2.66.8/glib/gwin32.c.orig	2021-03-18 14:47:48.347693400 +0100
 +++ glib-2.66.8/glib/gwin32.c	2021-05-22 12:35:00.835079487 +0200
+@@ -891,7 +891,7 @@ g_console_win32_init (void)
+       int          new_fd;
+       int          preferred_fd = i;
+       HANDLE       std_handle;
+-      errno_t      errsv = 0;
++      int          errsv = 0;
+ 
+       if (!streams[i].redirect)
+         continue;
 @@ -1109,7 +1109,7 @@ g_win32_veh_handler (PEXCEPTION_POINTERS
        return EXCEPTION_CONTINUE_SEARCH;
      }
