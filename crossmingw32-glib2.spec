@@ -149,7 +149,7 @@ Biblioteki DLL GLib 2 dla Windows.
 
 %prep
 %setup -q -n %{realname}-%{version}
-%patch0 -p1
+%patch -P0 -p1
 
 cat > meson-cross.txt <<'EOF'
 [host_machine]
